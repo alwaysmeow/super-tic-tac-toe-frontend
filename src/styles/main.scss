@@ -1,0 +1,39 @@
+$grey: #dfe3ea;
+$blue: #219ef1;
+$red: #e74c3c;
+
+.App
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.cell
+{
+    display: flex;
+    height: 3rem;
+    width: 3rem;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $grey;
+    border-radius: 5px;
+}
+
+.inner
+{
+    height: 80%;
+    width: 80%;
+
+    &.blue
+    {
+        color: $blue;
+    }
+
+    &.red
+    {
+        color: $red;
+    }
+}
