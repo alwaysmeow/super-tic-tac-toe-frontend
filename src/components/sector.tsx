@@ -8,11 +8,14 @@ import Cell from './cell';
 interface SectorProps {
     x: number,
     y: number,
-    highlighted?: boolean,
 }
 
-function Sector({ x, y, highlighted } : SectorProps) {
-    const value = useSelector((state) => state.game.board[x][y])
+function Sector({ x, y } : SectorProps) {
+    const value = useSelector((state) => state.game.board[x][y]);
+    const highlighted = useSelector((state) => {
+        let xy = state.game.highlightedSector;
+        return (xy !== null) && (xy.x === x) && (xy.y === y)
+    });
 
     return (
         <div className='sector grid'>

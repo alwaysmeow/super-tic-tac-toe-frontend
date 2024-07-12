@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Mark } from '../types';
+import { Mark, Coordinates2D, Coordinates4D } from '../types';
 import reopenSectors from '../game/reopenSectors';
 
 interface gameState {
@@ -7,7 +7,7 @@ interface gameState {
     sectors: Array<Array<Array<Array<Mark>>>>,
     turn: number,
     openSectors: Array<Array<boolean>>,
-    highlightedSector: number | null,
+    highlightedSector: Coordinates2D | null,
 }
 
 const initialState: gameState = {
@@ -28,21 +28,23 @@ const initialState: gameState = {
     highlightedSector: null,
 }
 
-interface MovePayload {
-    x: number,
-    y: number,
-    i: number,
-    j: number
-}
-
 const gameSlice = createSlice({
     name: "game",
     initialState: initialState,
     reducers: {
-        setHighlightedSector: (state, action) => {
-            state.highlightedSector = action.payload;
+        highlight: (state, action: PayloadAction<Coordinates2D | null>) => {
+            if (action.payload == null)
+                state.highlightedSector = null;
+            else
+            {
+                const { x, y } = action.payload;
+                state.highlightedSector = {
+                    x: x,
+                    y: y,
+                }
+            }
         },
-        move: (state, action: PayloadAction<MovePayload>) => {
+        move: (state, action: PayloadAction<Coordinates4D>) => {
             const { x, y, i, j } = action.payload;
             state.sectors[x][y][i][j] = state.turn;
             state.turn = 3 - state.turn;
@@ -53,4 +55,4 @@ const gameSlice = createSlice({
 
 export default gameSlice.reducer;
 
-export const { setHighlightedSector, move } = gameSlice.actions;
+export const { highlight, move } = gameSlice.actions;

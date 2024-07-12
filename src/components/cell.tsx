@@ -4,7 +4,7 @@ import { RxCircle, RxCross2 } from 'react-icons/rx';
 
 import { Mark } from '../types';
 import { AppDispatch, RootState } from '../store/store';
-import { setHighlightedSector, move } from '../store/gameSlice';
+import { highlight, move } from '../store/gameSlice';
 import useSelector from '../hooks/useSelector';
 
 interface CellProps {
@@ -29,11 +29,14 @@ function Cell({ x, y, i, j, highlighted }: CellProps) {
     }
 
     const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        dispatch(setHighlightedSector(3 * i + j));
+        dispatch(highlight({
+            x: i,
+            y: j,
+        }));
     }
 
     const handleMouseOut = () => {
-        dispatch(setHighlightedSector(null));
+        dispatch(highlight(null));
     }
 
     return (
