@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { RxCircle, RxCross2 } from 'react-icons/rx';
+// import { RxCircle, RxCross2 } from 'react-icons/rx';
 
-import { Mark } from '../types';
+// import { Mark } from '../types';
 import Cell from './cell';
 
 function Sector() {
