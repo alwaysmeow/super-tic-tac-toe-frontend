@@ -1,10 +1,11 @@
 import React from 'react';
 import Cell from './components/cell';
+import Board from './components/board';
 
 function App() {
   return (
     <div className="App">
-      <Cell/>
+      <Board/>
     </div>
   );
 }

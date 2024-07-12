@@ -13,8 +13,6 @@ $red: #e74c3c;
 .cell
 {
     display: flex;
-    height: 3rem;
-    width: 3rem;
     justify-content: center;
     align-items: center;
 
@@ -22,10 +20,10 @@ $red: #e74c3c;
     border-radius: 5px;
 }
 
-.inner
+.mark
 {
-    height: 80%;
-    width: 80%;
+    height: 90%;
+    width: 90%;
 
     &.blue
     {
@@ -36,4 +34,18 @@ $red: #e74c3c;
     {
         color: $red;
     }
+}
+
+.grid
+{
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    grid-template-rows: repeat(3, 30%);
+    gap: 5%;
+}
+
+.board
+{
+    height: 25rem;
+    width: 25rem;
 }

@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { RxCircle, RxCross2 } from 'react-icons/rx';
 
-enum Inner {
-    None = 0,
-    Сross = 1,
-    Nought = 2,
-}
+import { Mark } from '../types';
 
 function Cell() {
-    const [inner, setInner] = useState<Inner>(Inner.None);
+    const [value, setValue] = useState<Mark>(Mark.None);
 
     const handleClick = (event : React.MouseEvent<HTMLDivElement>) => {
-        setInner(Inner.Сross);
+        setValue(Mark.X);
     }
 
     return (
         <div className='cell' onClick={handleClick}>
             {
-                inner === Inner.Сross ?
-                    <RxCross2 className='inner blue'/>
-                : inner === Inner.Nought ?
-                    <RxCircle className='inner red'/>
+                value === Mark.X ?
+                    <RxCross2 className='mark blue'/>
+                : value === Mark.O ?
+                    <RxCircle className='mark red'/>
                 :
                     <></>
             }
