@@ -4,7 +4,7 @@ import { RxCircle, RxCross2 } from 'react-icons/rx';
 
 import { Mark } from '../types';
 import { AppDispatch, RootState } from '../store/store';
-import { switchPlayer } from '../store/gameSlice';
+import { switchTurn } from '../store/gameSlice';
 
 function Cell() {
     const dispatch = useDispatch<AppDispatch>();
@@ -14,9 +14,9 @@ function Cell() {
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         if (value === Mark.None)
         {
-            const move: number = store.getState().game.currentPlayer
-            setValue(move);
-            dispatch(switchPlayer());
+            const turn: number = store.getState().game.turn
+            setValue(turn);
+            dispatch(switchTurn());
         }
     }
 
