@@ -12,10 +12,7 @@ function Board() {
         <div className='board grid'>
             {
                 [...Array(9)].map((item: number, index: number) => 
-                    index === highlightedSector ?
-                        <Sector key={index} highlighted/>
-                    :
-                        <Sector key={index}/>
+                    <Sector key={index} x={Math.floor(index / 3)} y={index % 3} highlighted={index === highlightedSector}/>
                 )
             }
         </div>

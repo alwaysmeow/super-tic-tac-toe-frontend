@@ -5,15 +5,20 @@ import React, { useState } from 'react';
 import Cell from './cell';
 
 interface SectorProps {
+    x: number,
+    y: number,
     highlighted?: boolean,
 }
 
-function Sector({ highlighted } : SectorProps) {
+function Sector({ x, y, highlighted } : SectorProps) {
     return (
         <div className='sector grid'>
             {
                 [...Array(9)].map((item: number, index: number) => 
-                    <Cell key={index} highlighted={highlighted} index={index}/>
+                    <Cell key={index} 
+                        x={x} y={y} i={Math.floor(index / 3)} j={index % 3} 
+                        highlighted={highlighted}
+                    />
                 )
             }
         </div>
