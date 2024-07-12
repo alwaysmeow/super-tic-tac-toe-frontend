@@ -1,6 +1,7 @@
 $grey: #dfe3ea;
 $blue: #219ef1;
 $red: #e74c3c;
+$highlight: #b8bdc6;
 
 .App
 {
@@ -18,6 +19,11 @@ $red: #e74c3c;
 
     background-color: $grey;
     border-radius: 5px;
+
+    &.highlighted
+    {
+        background-color: $highlight;
+    }
 }
 
 .mark
