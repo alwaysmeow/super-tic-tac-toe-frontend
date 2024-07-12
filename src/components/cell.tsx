@@ -18,10 +18,11 @@ interface CellProps {
 function Cell({ x, y, i, j, highlighted }: CellProps) {
     const dispatch = useDispatch<AppDispatch>();
     const value = useSelector((state) => state.game.sectors[x][y][i][j]);
+    const open = useSelector((state) => state.game.openSectors[x][y])
     const store = useStore<RootState>();
 
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (value === Mark.None)
+        if (open && value === Mark.None)
         {
             const turn: number = store.getState().game.turn;
             dispatch(move({x, y, i, j}));
@@ -29,10 +30,11 @@ function Cell({ x, y, i, j, highlighted }: CellProps) {
     }
 
     const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
-        dispatch(highlight({
-            x: i,
-            y: j,
-        }));
+        if (open)
+            dispatch(highlight({
+                x: i,
+                y: j,
+            }));
     }
 
     const handleMouseOut = () => {
@@ -40,7 +42,7 @@ function Cell({ x, y, i, j, highlighted }: CellProps) {
     }
 
     return (
-        <div className={'cell' + (highlighted ? ' highlighted' : '')} 
+        <div className={'cell' + (highlighted ? ' highlighted' : '') + (open ? ' open' : '')} 
             onClick={handleClick}
             onMouseOver={handleHover}
             onMouseOut={handleMouseOut}

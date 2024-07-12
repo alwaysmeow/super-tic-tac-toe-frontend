@@ -1,7 +1,8 @@
 $grey: #dfe3ea;
 $blue: #219ef1;
 $red: #e74c3c;
-$highlight: #b8bdc6;
+$yellow: #fff8be;
+$darkgrey: #b8bdc6;
 
 .App
 {
@@ -20,9 +21,14 @@ $highlight: #b8bdc6;
     background-color: $grey;
     border-radius: 5px;
 
-    &.highlighted
+    &.open
     {
-        background-color: $highlight;
+        background-color: $yellow;
+    }
+
+    &.highlighted, &.open:hover
+    {
+        background-color: $darkgrey;
     }
 }
 

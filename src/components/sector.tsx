@@ -18,7 +18,7 @@ function Sector({ x, y } : SectorProps) {
     });
 
     return (
-        <div className='sector grid'>
+        <div className={'sector grid'}>
             {
                 [...Array(9)].map((item: number, index: number) => 
                     <Cell key={index} 
