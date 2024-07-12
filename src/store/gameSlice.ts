@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Mark } from '../types';
+import reopenSectors from '../game/reopenSectors';
 
 interface gameState {
-    turn: number,
-    highlightedSector: number | null,
     board: Array<Array<Mark>>,
     sectors: Array<Array<Array<Array<Mark>>>>,
+    turn: number,
+    openSectors: Array<Array<boolean>>,
+    highlightedSector: number | null,
 }
 
 const initialState: gameState = {
-    turn: 1,
-    highlightedSector: null,
     board: Array.from({length: 3}, () => 
         Array.from({length: 3}, () => 0),
     ),
@@ -21,6 +21,11 @@ const initialState: gameState = {
             )
         )
     ),
+    turn: 1,
+    openSectors: Array.from({length: 3}, () => 
+        Array.from({length: 3}, () => true),
+    ),
+    highlightedSector: null,
 }
 
 interface MovePayload {
@@ -41,6 +46,7 @@ const gameSlice = createSlice({
             const { x, y, i, j } = action.payload;
             state.sectors[x][y][i][j] = state.turn;
             state.turn = 3 - state.turn;
+            state.openSectors = reopenSectors(state.board, i, j);
         }
     }
 });

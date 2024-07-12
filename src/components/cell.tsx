@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { RxCircle, RxCross2 } from 'react-icons/rx';
 
