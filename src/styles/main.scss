@@ -58,6 +58,7 @@ $darkgrey: #b8bdc6;
 .grid
 {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(3, 30%);
     grid-template-rows: repeat(3, 30%);
     gap: 5%;
@@ -67,4 +68,17 @@ $darkgrey: #b8bdc6;
 {
     height: 25rem;
     width: 25rem;
+}
+
+.grid-overlay
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    border-radius: 5px;
+    background-color: white;
 }
