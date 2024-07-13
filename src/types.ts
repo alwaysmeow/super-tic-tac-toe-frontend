@@ -5,14 +5,14 @@ export enum Mark {
     Draw = 3,
 }
 
-export interface Coordinates4D {
+export interface SectorCoordinates {
     x: number,
     y: number,
-    i: number,
-    j: number
 }
 
-export interface Coordinates2D {
-    x: number,
-    y: number,
+export interface LocalCellCoordinates{
+    i: number,
+    j: number,
 }
+
+export interface GlobalCellCoordinates extends SectorCoordinates, LocalCellCoordinates {}

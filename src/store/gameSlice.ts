@@ -1,50 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Mark, Coordinates2D, Coordinates4D } from '../types';
+import { Mark, GlobalCellCoordinates, LocalCellCoordinates, SectorCoordinates } from '../types';
 import reopenSectors from '../game/reopenSectors';
+import { grid2D, grid4D } from '../game/createGrid';
 
 interface gameState {
-    board: Array<Array<Mark>>,
-    sectors: Array<Array<Array<Array<Mark>>>>,
+    board: Mark[][],
+    sectors: Mark[][][][],
     turn: number,
-    openSectors: Array<Array<boolean>>,
-    highlightedSector: Coordinates2D | null,
+    openSectors: boolean[][],
+    highlight: boolean[][],
 }
 
 const initialState: gameState = {
-    board: Array.from({length: 3}, () => 
-        Array.from({length: 3}, () => 0),
-    ),
-    sectors: Array.from({length: 3}, () => 
-        Array.from({length: 3}, () => 
-            Array.from({length: 3}, () => 
-                Array.from({length: 3}, () => 0),
-            )
-        )
-    ),
+    board: grid2D<Mark>(Mark.None),
+    sectors: grid4D<Mark>(Mark.None),
     turn: 1,
-    openSectors: Array.from({length: 3}, () => 
-        Array.from({length: 3}, () => true),
-    ),
-    highlightedSector: null,
+    openSectors: grid2D<boolean>(true),
+    highlight: grid2D<boolean>(false),
 }
 
 const gameSlice = createSlice({
     name: "game",
     initialState: initialState,
     reducers: {
-        highlight: (state, action: PayloadAction<Coordinates2D | null>) => {
+        highlight: (state, action: PayloadAction<LocalCellCoordinates | null>) => {
             if (action.payload == null)
-                state.highlightedSector = null;
+                state.highlight = grid2D<boolean>(false);
             else
             {
-                const { x, y } = action.payload;
-                state.highlightedSector = {
-                    x: x,
-                    y: y,
-                }
+                const { i, j } = action.payload;
+                state.highlight = reopenSectors(state.board, i, j);
             }
         },
-        move: (state, action: PayloadAction<Coordinates4D>) => {
+        move: (state, action: PayloadAction<GlobalCellCoordinates>) => {
             const { x, y, i, j } = action.payload;
             state.sectors[x][y][i][j] = state.turn;
             state.turn = 3 - state.turn;

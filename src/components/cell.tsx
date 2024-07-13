@@ -12,29 +12,26 @@ interface CellProps {
     y: number,
     i: number,
     j: number,
-    highlighted?: boolean,
 }
 
-function Cell({ x, y, i, j, highlighted }: CellProps) {
+function Cell({ x, y, i, j }: CellProps) {
     const dispatch = useDispatch<AppDispatch>();
     const value = useSelector((state) => state.game.sectors[x][y][i][j]);
     const open = useSelector((state) => state.game.openSectors[x][y])
+    const highlighted = useSelector((state) => value === Mark.None && state.game.highlight[x][y])
     const store = useStore<RootState>();
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleClick = () => {
         if (open && value === Mark.None)
         {
             const turn: number = store.getState().game.turn;
-            dispatch(move({x, y, i, j}));
+            dispatch(move({ x, y, i, j }));
         }
     }
 
-    const handleHover = (event: React.MouseEvent<HTMLDivElement>) => {
+    const handleHover = () => {
         if (open)
-            dispatch(highlight({
-                x: i,
-                y: j,
-            }));
+            dispatch(highlight({ i, j }));
     }
 
     const handleMouseOut = () => {

@@ -1,13 +1,12 @@
 import { Mark } from "../types";
+import { grid2D } from "./createGrid";
 
 function reopenSectors(board: Array<Array<Mark>>, i: number, j: number)
 {
     let openSectors;
     if (board[i][j] === Mark.None)
     {
-        openSectors = Array.from({length: 3}, () => 
-            Array.from({length: 3}, () => false),
-        );
+        openSectors = grid2D<boolean>(false)
         openSectors[i][j] = true;
     }
     else
