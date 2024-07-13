@@ -39,6 +39,7 @@ const gameSlice = createSlice({
         move: (state, action: PayloadAction<GlobalCellCoordinates>) => {
             const { x, y, i, j } = action.payload;
             state.sectors[x][y][i][j] = state.turn;
+            state.highlight = grid2D<boolean>(false);
 
             const localWin = evaluateGrid(state.sectors[x][y]);
             if (localWin !== Mark.None)

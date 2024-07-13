@@ -1,6 +1,8 @@
 $grey: #dfe3ea;
 $blue: #219ef1;
-$red: #e74c3c;
+$light-blue: #acdbfa;
+$red: #f12136;
+$light-red: #faacb4;
 $yellow: #fff8be;
 $darkgrey: #b8bdc6;
 
@@ -26,9 +28,14 @@ $darkgrey: #b8bdc6;
         background-color: $yellow;
     }
 
-    &.highlighted, &.open:hover
+    &.hl-red
     {
-        background-color: $darkgrey;
+        background-color: $light-red;
+    }
+
+    &.hl-blue
+    {
+        background-color: $light-blue;
     }
 }
 
