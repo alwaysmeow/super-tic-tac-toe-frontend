@@ -1,8 +1,7 @@
 import React from 'react';
 
 import Cell from './cell';
-import GridOverlay from './gridOverlay';
-import useSelector from '../hooks/useSelector';
+import Grid from './grid';
 
 interface SectorProps {
     x: number,
@@ -10,20 +9,21 @@ interface SectorProps {
 }
 
 function Sector({ x, y } : SectorProps) {
-    const value = useSelector((state) => state.game.board[x][y]);
 
     return (
-        <div className={'sector grid'}>
+        <Grid 
+            className='sector'
+            valueGetter={(state) => state.game.board[x][y]}
+        >
             {
-                [...Array(9)].map((item: number, index: number) => 
+                [...Array(9)].map((_, index: number) => 
                     <Cell key={index} 
                         x={x} y={y} i={Math.floor(index / 3)} j={index % 3}
                     />
                 )
             }
-            <GridOverlay mark={value}/>
-        </div>
-    );
+        </Grid>
+    )
 }
 
 export default Sector;
