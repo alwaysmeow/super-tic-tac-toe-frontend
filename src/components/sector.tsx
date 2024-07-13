@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { RxCircle, RxCross2 } from 'react-icons/rx';
+import React from 'react';
 
-import { Mark } from '../types';
-import useSelector from '../hooks/useSelector';
 import Cell from './cell';
+import GridOverlay from './gridOverlay';
+import useSelector from '../hooks/useSelector';
 
 interface SectorProps {
     x: number,
@@ -22,21 +21,7 @@ function Sector({ x, y } : SectorProps) {
                     />
                 )
             }
-            {
-                value !== Mark.None ?
-                    <div className='grid-overlay'>
-                    {
-                        value === Mark.X ?
-                            <RxCross2 className='mark blue'/>
-                        : value === Mark.O ?
-                            <RxCircle className='mark red'/>
-                        :
-                            <></>
-                    }
-                    </div>
-                :
-                    <></>
-            }
+            <GridOverlay mark={value}/>
         </div>
     );
 }

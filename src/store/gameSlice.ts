@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Mark, GlobalCellCoordinates, LocalCellCoordinates, SectorCoordinates } from '../types';
+import { Mark, GlobalCellCoordinates, LocalCellCoordinates } from '../types';
 
 import { grid2D, grid4D } from '../game/createGrid';
 import evaluateGrid from '../game/evaluateGrid';

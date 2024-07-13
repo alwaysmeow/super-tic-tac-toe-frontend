@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { RxCircle, RxCross2 } from 'react-icons/rx';
+import React from 'react';
 
-import { Mark } from '../types';
 import Sector from './sector';
+import GridOverlay from './gridOverlay';
 import useSelector from '../hooks/useSelector';
 
 function Board() {
@@ -15,21 +14,7 @@ function Board() {
                     <Sector key={index} x={Math.floor(index / 3)} y={index % 3}/>
                 )
             }
-            {
-                value !== Mark.None ?
-                    <div className='grid-overlay'>
-                    {
-                        value === Mark.X ?
-                            <RxCross2 className='mark blue'/>
-                        : value === Mark.O ?
-                            <RxCircle className='mark red'/>
-                        :
-                            <></>
-                    }
-                    </div>
-                :
-                    <></>
-            }
+            <GridOverlay mark={value}/>
         </div>
     );
 }
