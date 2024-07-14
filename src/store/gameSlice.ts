@@ -41,11 +41,11 @@ const gameSlice = createSlice({
             state.sectors[x][y][i][j] = state.turn;
             state.highlight = grid2D<boolean>(false);
 
-            const localWin = evaluateGrid(state.sectors[x][y]);
+            const localWin = evaluateGrid(state.sectors[x][y], i, j);
             if (localWin !== Mark.None)
             {
                 state.board[x][y] = localWin;
-                state.winner = evaluateGrid(state.board);
+                state.winner = evaluateGrid(state.board, x, y);
             }
 
             state.turn = 3 - state.turn;
