@@ -1,18 +1,4 @@
-$grey: #dfe3ea;
-$blue: #219ef1;
-$light-blue: #acdbfa;
-$red: #f12136;
-$light-red: #faacb4;
-$yellow: #fff8be;
-$darkgrey: #b8bdc6;
-
-.App
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+@import 'variables';
 
 .cell
 {

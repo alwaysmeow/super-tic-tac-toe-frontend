@@ -2,6 +2,7 @@ import React from 'react';
 
 import Sector from './sector';
 import Grid from './grid';
+import '../styles/board.scss';
 
 function Board() {
     return (
