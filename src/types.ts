@@ -5,6 +5,13 @@ export enum Mark {
     Draw = 3,
 }
 
+export enum JoinStatus {
+    Not = 0,
+    Joining = 1,
+    Creating = 2,
+    Joined = 3,
+}
+
 export interface SectorCoordinates {
     x: number,
     y: number,

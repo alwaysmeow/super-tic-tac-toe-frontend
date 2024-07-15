@@ -2,14 +2,10 @@
 
 .main-page
 {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
 }
 
-.main-menu
+.menu
 {
     display: flex;
     flex-direction: column;
@@ -31,4 +27,16 @@
             opacity: 90%;
         }
     }
+}
+
+.main-menu { }
+
+.joining-menu
+{
+    position: absolute;
+
+    padding: 2rem;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
 }

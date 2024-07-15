@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import gameReducer from './gameSlice'
+import joiningReducer from './joiningSlice';
 
 const store = configureStore({
     reducer: {
         game: gameReducer,
+        joining: joiningReducer,
     }
 });
 

@@ -1,12 +1,11 @@
-async function joinLobbyRequest(lobbyCode: number, playerName: string) {
+async function deleteLobbyRequest(lobbyCode: number) {
     const postdata = {
         lobbyCode,
-        playerName,
     };
-    
-    return await fetch('/api/lobby/joinLobby', 
+
+    return await fetch('/api/lobby/deleteLobby', 
         {
-            method: "POST",
+            method: "DELETE",
             credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
@@ -16,4 +15,4 @@ async function joinLobbyRequest(lobbyCode: number, playerName: string) {
         .then(response => response.status)
 }
 
-export default joinLobbyRequest;
+export default deleteLobbyRequest;
