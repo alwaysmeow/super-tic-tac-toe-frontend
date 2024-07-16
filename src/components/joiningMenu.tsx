@@ -4,7 +4,8 @@ import { setLobbyId, setPlayerName } from "../store/joiningSlice";
 import { JoinStatus } from '../types';
 import useSelector from "../hooks/useSelector";
 import joinLobbyRequest from "../requests/joinLobbyRequest";
-import { loadState } from "../store/gameSlice";
+import { setGameState } from "../store/gameSlice";
+import getGameState from "../requests/getGameState";
 
 interface JoiningMenuProps {
     joining: JoinStatus,
@@ -33,19 +34,15 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
         {
             const lobby = Number(lobbyId)
             joinLobbyRequest(lobby, playerName)
-            .then(response => {
-                if (response.status === 200)
-                    return response.json();
-                else
-                    return null
-            })
-            .then((data) => {
-                if (data)
-                {
-                    const player = data.playerType;
-                    dispatch(loadState({ lobby, player }));
-                    document.location.href = '/game';
-                }
+            .then(response => response.status === 200 ? response.json() : null)
+            .then(data => data ? data.playerType : null)
+            .then(player => {
+                if (player)
+                    getGameState(lobby, player)
+                    .then(state => {
+                        dispatch(setGameState(state));
+                        document.location.href = '/game';
+                    });
             })
         }
     }

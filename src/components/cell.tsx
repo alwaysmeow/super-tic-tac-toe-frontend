@@ -25,7 +25,7 @@ function Cell({ x, y, i, j }: CellProps) {
     const open = useSelector((state) => state.game.openSectors[x][y] && value === Mark.None);
 
     const handleClick = () => {
-        if (open)
+        if (open && turn() > Mark.None)
         {
             setHover(false);
             dispatch(move({ x, y, i, j }));
@@ -33,7 +33,7 @@ function Cell({ x, y, i, j }: CellProps) {
     }
 
     const handleHover = () => {
-        if (open)
+        if (open && turn() > Mark.None)
         {
             setHover(true);
             dispatch(highlight({ i, j }));
