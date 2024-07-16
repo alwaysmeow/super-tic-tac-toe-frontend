@@ -4,7 +4,6 @@ import { setLobbyCode, setPlayerName } from "../store/joiningSlice";
 import { JoinStatus } from '../types';
 import useSelector from "../hooks/useSelector";
 import joinLobbyRequest from "../requests/joinLobbyRequest";
-import { stat } from "fs";
 
 interface JoiningMenuProps {
     joining: JoinStatus,

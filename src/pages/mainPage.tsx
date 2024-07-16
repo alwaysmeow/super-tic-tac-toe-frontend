@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 
 import '../styles/menu.scss'
 import createLobbyRequest from '../requests/createLobbyRequest';
-import joinLobbyRequest from '../requests/joinLobbyRequest';
 import { useDispatch } from 'react-redux';
-import useSelector from '../hooks/useSelector';
 import { setLobbyCode } from '../store/joiningSlice';
 import JoiningMenu from '../components/joiningMenu';
 import { JoinStatus } from '../types';
@@ -12,8 +10,6 @@ import { JoinStatus } from '../types';
 function MainPage() {
     const dispatch = useDispatch();
 
-    const lobbyCode = useSelector((state) => state.joining.lobbyCode);
-    const playerName = useSelector((state) => state.joining.playerName);
     const [joining, setJoining] = useState<JoinStatus>(JoinStatus.Not);
 
     const handleCreateLobby = () => {
