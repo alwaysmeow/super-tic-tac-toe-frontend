@@ -23,3 +23,12 @@ export interface LocalCellCoordinates{
 }
 
 export interface GlobalCellCoordinates extends SectorCoordinates, LocalCellCoordinates {}
+
+export interface GameState {
+    winner: Mark;
+    board: Mark[][],
+    sectors: Mark[][][][],
+    turn: Mark,
+    openSectors: boolean[][],
+    highlight: boolean[][],
+}

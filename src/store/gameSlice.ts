@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Mark, GlobalCellCoordinates, LocalCellCoordinates } from '../types';
+import { Mark, GlobalCellCoordinates, LocalCellCoordinates, GameState } from '../types';
 
 import { grid2D, grid4D } from '../game/createGrid';
 import evaluateGrid from '../game/evaluateGrid';
 import reopenSectors from '../game/reopenSectors';
+import getStateRequest from '../requests/getStateRequest';
 
-interface gameState {
-    winner: Mark;
-    board: Mark[][],
-    sectors: Mark[][][][],
-    turn: Mark,
-    openSectors: boolean[][],
-    highlight: boolean[][],
-}
-
-const initialState: gameState = {
+const initialState: GameState = {
     winner: Mark.None,
     board: grid2D<Mark>(Mark.None),
     sectors: grid4D<Mark>(Mark.None),
@@ -50,10 +42,17 @@ const gameSlice = createSlice({
 
             state.turn = 3 - state.turn;
             state.openSectors = reopenSectors(state.board, i, j);
+        },
+        clearState: (state) => { state = initialState; },
+        loadState: (state, action: PayloadAction<number>) => {
+            getStateRequest(action.payload)
+            .then((data: GameState) => {
+                state = data;
+            })
         }
     }
 });
 
 export default gameSlice.reducer;
 
-export const { highlight, move } = gameSlice.actions;
+export const { highlight, move, loadState } = gameSlice.actions;

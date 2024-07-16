@@ -4,6 +4,7 @@ import { setLobbyCode, setPlayerName } from "../store/joiningSlice";
 import { JoinStatus } from '../types';
 import useSelector from "../hooks/useSelector";
 import joinLobbyRequest from "../requests/joinLobbyRequest";
+import { loadState } from "../store/gameSlice";
 
 interface JoiningMenuProps {
     joining: JoinStatus,
@@ -29,11 +30,17 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
 
     const handleJoin = () => {
         if (lobbyCode !== '')
-            joinLobbyRequest(Number(lobbyCode), playerName)
+        {
+            const lobby = Number(lobbyCode)
+            joinLobbyRequest(lobby, playerName)
             .then((status) => {
                 if (status === 200)
+                {
+                    dispatch(loadState(lobby));
                     document.location.href = '/game';
+                }
             })
+        }
     }
 
     if (joining === JoinStatus.Not)
