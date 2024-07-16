@@ -4,9 +4,10 @@ import { Mark, GlobalCellCoordinates, LocalCellCoordinates, GameState } from '..
 import { grid2D, grid4D } from '../game/createGrid';
 import evaluateGrid from '../game/evaluateGrid';
 import reopenSectors from '../game/reopenSectors';
-import getStateRequest from '../requests/getStateRequest';
+import getGameState from '../requests/getGameState';
 
 const initialState: GameState = {
+    player: Mark.Draw,
     winner: Mark.None,
     board: grid2D<Mark>(Mark.None),
     sectors: grid4D<Mark>(Mark.None),
@@ -44,8 +45,9 @@ const gameSlice = createSlice({
             state.openSectors = reopenSectors(state.board, i, j);
         },
         clearState: (state) => { state = initialState; },
-        loadState: (state, action: PayloadAction<number>) => {
-            getStateRequest(action.payload)
+        loadState: (state, action: PayloadAction<{ lobby: number, player: Mark }>) => {
+            const { lobby, player } = action.payload
+            getGameState(lobby, player)
             .then((data: GameState) => {
                 state = data;
             })

@@ -1,6 +1,6 @@
-async function makeMoveRequest(lobbyCode: number, playerName: string, x: number, y: number, i: number, j: number) {
+async function makeMoveRequest(lobbyId: number, playerName: string, x: number, y: number, i: number, j: number) {
     const postdata = {
-        lobbyCode, 
+        lobbyId, 
         playerName, 
         SectorRow: x, 
         SectorCol: y, 

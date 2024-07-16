@@ -1,6 +1,6 @@
-async function joinLobbyRequest(lobbyCode: number, playerName: string) {
+async function joinLobbyRequest(lobbyId: number, playerName: string) {
     const postdata = {
-        lobbyCode,
+        lobbyId,
         playerName,
     };
     
@@ -13,7 +13,6 @@ async function joinLobbyRequest(lobbyCode: number, playerName: string) {
             },
             body: JSON.stringify(postdata)
         })
-        .then(response => response.status)
 }
 
 export default joinLobbyRequest;

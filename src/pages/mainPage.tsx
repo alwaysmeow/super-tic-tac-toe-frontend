@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../styles/menu.scss'
 import createLobbyRequest from '../requests/createLobbyRequest';
 import { useDispatch } from 'react-redux';
-import { setLobbyCode } from '../store/joiningSlice';
+import { setLobbyId } from '../store/joiningSlice';
 import JoiningMenu from '../components/joiningMenu';
 import { JoinStatus } from '../types';
 
@@ -17,10 +17,10 @@ function MainPage() {
         createLobbyRequest()
         .then((response) => {
             console.log(response);
-            return response.lobbyCode;
+            return response.lobbyId;
         })
-        .then((lobbyCode) => {
-            dispatch(setLobbyCode(lobbyCode));
+        .then((lobbyId) => {
+            dispatch(setLobbyId(lobbyId));
         })
     }
 

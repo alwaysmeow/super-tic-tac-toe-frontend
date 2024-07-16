@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface joiningState {
-    lobbyCode: number | null,
+    lobbyId: number | null,
     playerName: string,
 }
 
 const initialState: joiningState = {
-    lobbyCode: null,
+    lobbyId: null,
     playerName: ''
 }
 
@@ -14,8 +14,8 @@ const joiningSlice = createSlice({
     name: "joining",
     initialState: initialState,
     reducers: {
-        setLobbyCode: (state, action: PayloadAction<number | null>) => {
-            state.lobbyCode = action.payload
+        setLobbyId: (state, action: PayloadAction<number | null>) => {
+            state.lobbyId = action.payload
         },
         setPlayerName: (state, action: PayloadAction<string>) => {
             state.playerName = action.payload
@@ -25,4 +25,4 @@ const joiningSlice = createSlice({
 
 export default joiningSlice.reducer;
 
-export const { setLobbyCode, setPlayerName } = joiningSlice.actions;
+export const { setLobbyId, setPlayerName } = joiningSlice.actions;
