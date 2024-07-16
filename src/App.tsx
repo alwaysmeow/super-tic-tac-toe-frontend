@@ -7,6 +7,7 @@ import GamePage from './pages/gamePage';
 import MainPage from './pages/mainPage';
 
 function App() {
+    
     return (
         <Provider store={store}>
             <Router>

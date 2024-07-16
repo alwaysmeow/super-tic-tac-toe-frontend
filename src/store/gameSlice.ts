@@ -44,8 +44,8 @@ const gameSlice = createSlice({
             state.openSectors = reopenSectors(state.board, i, j);
         },
         clearState: (state) => { state = initialState; },
-        setGameState: (state, action: PayloadAction<GameState>) => {
-            state = action.payload;
+        setGameState: (_, action: PayloadAction<GameState>) => {
+            return action.payload;
         }
     }
 });

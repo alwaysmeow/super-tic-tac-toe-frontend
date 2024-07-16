@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import { setLobbyId, setPlayerName } from "../store/joiningSlice";
 import { JoinStatus } from '../types';
 import useSelector from "../hooks/useSelector";
@@ -13,6 +15,7 @@ interface JoiningMenuProps {
 
 function JoiningMenu({ joining }: JoiningMenuProps) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const lobbyId = useSelector((state) => state.joining.lobbyId ? String(state.joining.lobbyId) : '');
     const playerName = useSelector((state) => state.joining.playerName);
@@ -41,7 +44,7 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
                     getGameState(lobby, player)
                     .then(state => {
                         dispatch(setGameState(state));
-                        document.location.href = '/game';
+                        navigate('/game');
                     });
             })
         }
