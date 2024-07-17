@@ -7,7 +7,6 @@ import { AppDispatch, RootState } from '../store/store';
 import { setHighlight, move } from '../store/gameSlice';
 import useSelector from '../hooks/useSelector';
 import useHighlight from '../hooks/useHighlight';
-import useTurn from '../hooks/useTurn';
 import makeMoveRequest from '../requests/makeMoveRequest';
 
 interface CellProps {
@@ -24,7 +23,7 @@ function Cell({ x, y, i, j }: CellProps) {
     const value = useSelector(state => state.game.sectors[x][y][i][j]);
     const open = useSelector(state => state.game.openSectors[x][y] && value === Mark.None);
     const [hover, setHover] = useState<boolean>(false);
-    const turn = useTurn();
+    const turn = useSelector(state => state.game.turn & state.lobby.player);
     const highlight = useHighlight(x, y, i, j, hover);
 
     const handleClick = useCallback(() => {

@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 
 import { RootState } from "../store/store";
 import { Mark } from "../types";
-import useTurn from "./useTurn";
 
 function useHighlight(x: number, y: number, i: number, j: number, hover: boolean): Mark
 {
-    const turn = useTurn();
+    const turn = useSelector((state: RootState) => state.game.turn);
     const [highlight, setHighlight] = useState<Mark>(Mark.None);
 
     const value = useSelector((state: RootState) => state.game.sectors[x][y][i][j]);
