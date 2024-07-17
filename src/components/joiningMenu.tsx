@@ -33,7 +33,7 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
     }
 
     const handleJoin = () => {
-        if (lobbyId !== '')
+        if (lobbyId !== '' && playerName !== '')
         {
             const lobby = Number(lobbyId)
             joinLobbyRequest(lobby, playerName)

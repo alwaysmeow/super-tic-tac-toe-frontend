@@ -1,32 +1,24 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { RootState } from "../store/store";
 import { Mark } from "../types";
 import useTurn from "./useTurn";
 
-function useHighlight(x: number, y: number, i: number, j: number): [() => Mark, [boolean, React.Dispatch<React.SetStateAction<boolean>>]]
+function useHighlight(x: number, y: number, i: number, j: number, hover: boolean): Mark
 {
     const turn = useTurn();
+    const [highlight, setHighlight] = useState<Mark>(Mark.None);
 
-    const [hover, setHover] = useState<boolean>(false);
     const value = useSelector((state: RootState) => state.game.sectors[x][y][i][j]);
     const opening = useSelector((state: RootState) => state.game.highlight[x][y] && value === Mark.None);
     const open = useSelector((state: RootState) => state.game.openSectors[x][y] && value === Mark.None);
 
-    const highlighted = () => 
-        hover ? 
-            turn()
-        : 
-            opening ?
-                3 - turn()
-            :
-                open ? 
-                    turn()
-                :
-                    Mark.None
+    useEffect(() => {
+        setHighlight(hover ? turn : opening ? 3 - turn : open ? turn : Mark.None);
+    }, [hover, opening, open, turn])
 
-    return [ highlighted, [ hover, setHover ] ];
+    return highlight;
 }
 
 export default useHighlight;

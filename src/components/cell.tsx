@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { RxCircle, RxCross2 } from 'react-icons/rx';
 
 import { Mark } from '../types';
 import { AppDispatch } from '../store/store';
-import { highlight, move } from '../store/gameSlice';
+import { setHighlight, move } from '../store/gameSlice';
 import useSelector from '../hooks/useSelector';
 import useHighlight from '../hooks/useHighlight';
 import useTurn from '../hooks/useTurn';
@@ -18,45 +18,46 @@ interface CellProps {
 
 function Cell({ x, y, i, j }: CellProps) {
     const dispatch = useDispatch<AppDispatch>();
+
+    const value = useSelector(state => state.game.sectors[x][y][i][j]);
+    const open = useSelector(state => state.game.openSectors[x][y] && value === Mark.None);
+    const [hover, setHover] = useState<boolean>(false);
     const turn = useTurn();
-    const [highlighted, [hover, setHover] ] = useHighlight(x, y, i, j);
+    const highlight = useHighlight(x, y, i, j, hover);
 
-    const value = useSelector((state) => state.game.sectors[x][y][i][j]);
-    const open = useSelector((state) => state.game.openSectors[x][y] && value === Mark.None);
-
-    const handleClick = () => {
-        if (open && turn() > Mark.None)
+    const handleClick = useCallback(() => {
+        if (open && turn > Mark.None)
         {
             setHover(false);
             dispatch(move({ x, y, i, j }));
         }
-    }
+    }, [open, turn, dispatch, x, y, i, j])
 
-    const handleHover = () => {
-        if (open && turn() > Mark.None)
+    const handleHover = useCallback(() => {
+        if (open && turn > Mark.None)
         {
             setHover(true);
-            dispatch(highlight({ i, j }));
+            dispatch(setHighlight({ i, j }));
         }
-    }
+    }, [open, turn, dispatch, i, j])
 
-    const handleMouseOut = () => {
-        dispatch(highlight(null));
+    const handleMouseOut = useCallback(() => {
+        dispatch(setHighlight(null));
         setHover(false);
-    }
+    }, [dispatch])
 
     return (
         <div className={'cell'
-                + (highlighted() === Mark.X ? ' hl-blue' : highlighted() === Mark.O ? ' hl-red' : '')
+                + (highlight === Mark.X ? ' hl-blue' : highlight === Mark.O ? ' hl-red' : '')
             } 
             onClick={handleClick}
             onMouseOver={handleHover}
             onMouseOut={handleMouseOut}
         >
             {
-                (open && hover && turn() === Mark.X) || value === Mark.X ?
+                (open && hover && turn === Mark.X) || value === Mark.X ?
                     <RxCross2 className='mark blue'/>
-                : (open && hover && turn() === Mark.O) || value === Mark.O ?
+                : (open && hover && turn === Mark.O) || value === Mark.O ?
                     <RxCircle className='mark red'/>
                 :
                     <></>

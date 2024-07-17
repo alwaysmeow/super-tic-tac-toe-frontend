@@ -8,19 +8,18 @@ import { clearGameState, setGameState } from '../store/gameSlice';
 
 function GamePage() {
     const dispatch = useDispatch();
-    const lobbyId = useSelector(state => state.joining.lobbyId)
+    const lobbyId = useSelector(state => state.joining.lobbyId);
+    const playerName = useSelector(state => state.joining.playerName);
 
     useEffect(() => {
-        const player = 1;
-        
         if (lobbyId)
-            getGameState(lobbyId, player)
+            getGameState(lobbyId, playerName)
             .then(state => {
                 dispatch(setGameState(state));
             });
         else
             dispatch(clearGameState());
-    }, [dispatch, lobbyId]);
+    }, [dispatch, lobbyId, playerName]);
 
     return (
         <div className='page game-page'>

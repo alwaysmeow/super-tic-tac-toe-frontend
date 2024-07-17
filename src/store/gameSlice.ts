@@ -19,7 +19,7 @@ const gameSlice = createSlice({
     name: "game",
     initialState: initialState,
     reducers: {
-        highlight: (state, action: PayloadAction<LocalCellCoordinates | null>) => {
+        setHighlight: (state, action: PayloadAction<LocalCellCoordinates | null>) => {
             if (action.payload == null)
                 state.highlight = grid2D<boolean>(false);
             else
@@ -50,4 +50,4 @@ const gameSlice = createSlice({
 
 export default gameSlice.reducer;
 
-export const { highlight, move, clearGameState, setGameState } = gameSlice.actions;
+export const { setHighlight, move, clearGameState, setGameState } = gameSlice.actions;
