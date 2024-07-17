@@ -1,11 +1,8 @@
 import { grid2D } from "../game/createGrid";
 import { GameState } from "../types";
 
-async function getStateRequest(lobbyId: number, playerName: string) {
-    const queryParams = new URLSearchParams({ 
-        lobbyId: lobbyId.toString(), 
-        playerName: playerName,
-    }).toString();
+async function getStateRequest(lobbyId: number) {
+    const queryParams = new URLSearchParams({ lobbyId: lobbyId.toString() }).toString();
     const url = `/api/lobby/getGameState?${queryParams}`;
     
     return await fetch(url, 
@@ -19,9 +16,9 @@ async function getStateRequest(lobbyId: number, playerName: string) {
         .then(response => response.json())
 }
 
-async function getGameState(lobbyId: number, playerName: string)
+async function getGameState(lobbyId: number)
 {
-    return getStateRequest(lobbyId, playerName)
+    return getStateRequest(lobbyId)
         .then((data) => {
             data.highlight = grid2D<boolean>(false);
             const state: GameState = data;

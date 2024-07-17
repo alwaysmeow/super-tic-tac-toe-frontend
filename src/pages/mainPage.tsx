@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import '../styles/menu.scss'
 import createLobbyRequest from '../requests/createLobbyRequest';
 import { useDispatch } from 'react-redux';
-import { setLobbyId } from '../store/joiningSlice';
+import { clearLobbyState, setLobbyId } from '../store/lobbySlice';
 import JoiningMenu from '../components/joiningMenu';
 import { JoinStatus } from '../types';
 
@@ -11,6 +11,10 @@ function MainPage() {
     const dispatch = useDispatch();
 
     const [joining, setJoining] = useState<JoinStatus>(JoinStatus.Not);
+
+    useEffect(() => {
+        dispatch(clearLobbyState());
+    }, [dispatch])
 
     const handleCreateLobby = () => {
         setJoining(JoinStatus.Creating)

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { setLobbyId, setPlayerName } from "../store/joiningSlice";
+import { setLobbyId, setPlayerMark, setPlayerName } from "../store/lobbySlice";
 import { JoinStatus } from '../types';
 import useSelector from "../hooks/useSelector";
 import joinLobbyRequest from "../requests/joinLobbyRequest";
@@ -17,8 +17,8 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const lobbyId = useSelector((state) => state.joining.lobbyId ? String(state.joining.lobbyId) : '');
-    const playerName = useSelector((state) => state.joining.playerName);
+    const lobbyId = useSelector((state) => state.lobby.lobbyId ? String(state.lobby.lobbyId) : '');
+    const playerName = useSelector((state) => state.lobby.playerName);
 
     const handleLobbyIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (joining === JoinStatus.Joining)
@@ -41,8 +41,9 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
             .then(data => data ? data.playerType : null)
             .then(player => {
                 if (player)
-                    getGameState(lobby, player)
+                    getGameState(lobby)
                     .then(state => {
+                        dispatch(setPlayerMark(player))
                         dispatch(setGameState(state));
                         navigate('/game');
                     });

@@ -6,7 +6,6 @@ import evaluateGrid from '../game/evaluateGrid';
 import reopenSectors from '../game/reopenSectors';
 
 const initialState: GameState = {
-    player: Mark.Draw,
     winner: Mark.None,
     board: grid2D<Mark>(Mark.None),
     sectors: grid4D<Mark>(Mark.None),
