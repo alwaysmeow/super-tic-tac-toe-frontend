@@ -43,13 +43,11 @@ const gameSlice = createSlice({
             state.turn = 3 - state.turn;
             state.openSectors = reopenSectors(state.board, i, j);
         },
-        clearState: (state) => { state = initialState; },
-        setGameState: (_, action: PayloadAction<GameState>) => {
-            return action.payload;
-        }
+        clearGameState: (_) => initialState,
+        setGameState: (_, action: PayloadAction<GameState>) => action.payload,
     }
 });
 
 export default gameSlice.reducer;
 
-export const { highlight, move, setGameState } = gameSlice.actions;
+export const { highlight, move, clearGameState, setGameState } = gameSlice.actions;
