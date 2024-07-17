@@ -15,10 +15,7 @@ function MainPage() {
     const handleCreateLobby = () => {
         setJoining(JoinStatus.Creating)
         createLobbyRequest()
-        .then((response) => {
-            console.log(response);
-            return response.lobbyId;
-        })
+        .then((response) => response.lobbyId)
         .then((lobbyId) => {
             dispatch(setLobbyId(lobbyId));
         })

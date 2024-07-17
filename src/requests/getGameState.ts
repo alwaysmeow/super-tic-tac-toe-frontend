@@ -7,7 +7,6 @@ async function getStateRequest(lobbyId: number, playerName: string) {
         playerName: playerName,
     }).toString();
     const url = `/api/lobby/getGameState?${queryParams}`;
-    console.log(url);
     
     return await fetch(url, 
         {
@@ -26,7 +25,6 @@ async function getGameState(lobbyId: number, playerName: string)
         .then((data) => {
             data.highlight = grid2D<boolean>(false);
             const state: GameState = data;
-            console.log(state);
             return state;
         })
 }

@@ -17,7 +17,6 @@ async function makeMoveRequest(lobbyId: number, playerName: string, x: number, y
             },
             body: JSON.stringify(postdata)
         })
-        .then(response => response.json())
 }
 
 export default makeMoveRequest;
