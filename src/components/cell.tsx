@@ -35,7 +35,7 @@ function Cell({ x, y, i, j }: CellProps) {
             setMark(turn);
             dispatch(move({ x, y, i, j }));
         }
-    }, [store, turn, dispatch, setHoverHighlight, x, y, i, j])
+    }, [store, open, turn, dispatch, setHoverHighlight, x, y, i, j])
 
     const handleHover = useCallback(() => {
         if (open)
@@ -44,7 +44,7 @@ function Cell({ x, y, i, j }: CellProps) {
             setMark(turn);
             dispatch(setHighlight({ i, j }));
         }
-    }, [dispatch, turn, setHoverHighlight, i, j])
+    }, [open, turn, dispatch, setHoverHighlight, i, j])
 
     const handleMouseOut = useCallback(() => {
         if (open)
@@ -53,7 +53,7 @@ function Cell({ x, y, i, j }: CellProps) {
             setMark(Mark.None);
             dispatch(setHighlight(null));
         }
-    }, [dispatch, setHoverHighlight])
+    }, [open, dispatch, setHoverHighlight])
 
     return (
         <div className={'cell'
