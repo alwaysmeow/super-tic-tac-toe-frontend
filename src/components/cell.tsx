@@ -20,13 +20,13 @@ function Cell({ x, y, i, j }: CellProps) {
     const store = useStore<RootState>();
     const dispatch = useDispatch<AppDispatch>();
 
-    const open = useSelector(state => state.game.openSectors[x][y] && state.game.sectors[x][y][i][j] === Mark.None);
     const turn = useSelector(state => state.game.turn & state.lobby.player);
+    const open = useSelector(state => turn && state.game.openSectors[x][y] && state.game.sectors[x][y][i][j] === Mark.None);
     const [ mark, setMark ] = useState<Mark>(Mark.None);
     const [ highlight, setHoverHighlight ] = useHighlight(x, y, i, j);
 
     const handleClick = useCallback(() => {
-        if (Boolean(turn) && open)
+        if (open)
         {
             const { lobbyId, playerName } = store.getState().lobby;
             if (lobbyId)
@@ -35,25 +35,25 @@ function Cell({ x, y, i, j }: CellProps) {
             setMark(turn);
             dispatch(move({ x, y, i, j }));
         }
-    }, [store, open, turn, dispatch, setHoverHighlight, x, y, i, j])
+    }, [store, turn, dispatch, setHoverHighlight, x, y, i, j])
 
     const handleHover = useCallback(() => {
-        if (Boolean(turn) && open)
+        if (open)
         {
             setHoverHighlight(true);
             setMark(turn);
             dispatch(setHighlight({ i, j }));
         }
-    }, [open, turn, dispatch, setHoverHighlight, i, j])
+    }, [dispatch, turn, setHoverHighlight, i, j])
 
     const handleMouseOut = useCallback(() => {
-        if (Boolean(turn) && open)
+        if (open)
         {
             setHoverHighlight(false);
             setMark(Mark.None);
             dispatch(setHighlight(null));
         }
-    }, [dispatch, setHoverHighlight, turn, open])
+    }, [dispatch, setHoverHighlight])
 
     return (
         <div className={'cell'
@@ -63,12 +63,7 @@ function Cell({ x, y, i, j }: CellProps) {
             onMouseOver={handleHover}
             onMouseOut={handleMouseOut}
         >
-            {
-                mark > Mark.None ?
-                    <MarkSvg mark={mark}/>
-                :
-                    <></>
-            }
+            { mark > Mark.None && <MarkSvg mark={mark}/> }
         </div>
     );
 }
