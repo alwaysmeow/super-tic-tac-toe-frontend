@@ -49,7 +49,7 @@ function Cell({ x, y, i, j }: CellProps) {
         console.log(turn, open, Boolean(turn) && open);
         dispatch(setHighlight(null));
         setHover(false);
-    }, [dispatch])
+    }, [dispatch, turn, open])
 
     return (
         <div className={'cell'

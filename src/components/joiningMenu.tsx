@@ -45,7 +45,7 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
                     .then(state => {
                         dispatch(setPlayerMark(player))
                         dispatch(setGameState(state));
-                        navigate('/game');
+                        navigate(`/game?id=${lobby}`);
                     });
             })
         }

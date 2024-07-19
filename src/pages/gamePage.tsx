@@ -7,12 +7,16 @@ import getGameState from '../requests/getGameState';
 import { clearGameState, setGameState } from '../store/gameSlice';
 import { setPlayerMark } from '../store/lobbySlice';
 import { Mark } from '../types';
+import { useSearchParams } from 'react-router-dom';
 
 function GamePage() {
     const dispatch = useDispatch();
     const lobbyId = useSelector(state => state.lobby.lobbyId);
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get('id')
 
     useEffect(() => {
+        console.log(id);
         if (lobbyId)
             getGameState(lobbyId)
             .then(state => {
