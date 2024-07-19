@@ -46,9 +46,11 @@ function Cell({ x, y, i, j }: CellProps) {
     }, [open, turn, dispatch, i, j])
 
     const handleMouseOut = useCallback(() => {
-        console.log(turn, open, Boolean(turn) && open);
-        dispatch(setHighlight(null));
-        setHover(false);
+        if (Boolean(turn) && open)
+        {
+            setHover(false);
+            dispatch(setHighlight(null));
+        }
     }, [dispatch, turn, open])
 
     return (
