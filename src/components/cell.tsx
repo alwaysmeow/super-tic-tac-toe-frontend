@@ -21,7 +21,7 @@ function Cell({ x, y, i, j }: CellProps) {
     const dispatch = useDispatch<AppDispatch>();
 
     const turn = useSelector(state => state.game.turn & state.lobby.player);
-    const open = useSelector(state => turn && state.game.openSectors[x][y] && state.game.sectors[x][y][i][j] === Mark.None);
+    const open = useSelector(state => turn > Mark.None && state.game.openSectors[x][y] && state.game.sectors[x][y][i][j] === Mark.None);
     const [ mark, setMark ] = useState<Mark>(Mark.None);
     const [ highlight, setHoverHighlight ] = useHighlight(x, y, i, j);
 
