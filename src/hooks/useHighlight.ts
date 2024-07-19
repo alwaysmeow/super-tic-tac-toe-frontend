@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { RootState } from "../store/store";
 import { Mark } from "../types";
 
-function useHighlight(x: number, y: number, i: number, j: number, hover: boolean): Mark
+function useHighlight(x: number, y: number, i: number, j: number): [ Mark, React.Dispatch<React.SetStateAction<boolean>> ]
 {
+    const [hover, setHover] = useState<boolean>(false);
     const turn = useSelector((state: RootState) => state.game.turn);
     const [highlight, setHighlight] = useState<Mark>(Mark.None);
 
@@ -17,7 +18,7 @@ function useHighlight(x: number, y: number, i: number, j: number, hover: boolean
         setHighlight(hover ? turn : opening ? 3 - turn : open ? turn : Mark.None);
     }, [hover, opening, open, turn])
 
-    return highlight;
+    return [ highlight, setHover ];
 }
 
 export default useHighlight;
