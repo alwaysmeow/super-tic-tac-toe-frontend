@@ -4,6 +4,7 @@ import '../styles/menu.scss'
 import createLobbyRequest from '../requests/createLobbyRequest';
 import { useDispatch } from 'react-redux';
 import { clearLobbyState, setLobbyId } from '../store/lobbySlice';
+import Title from '../components/title';
 import JoiningMenu from '../components/joiningMenu';
 import { JoinStatus } from '../types';
 
@@ -31,6 +32,8 @@ function MainPage() {
 
     return (
         <div className='page main-page'>
+            <Title/>
+            <div className='splitter'></div>
             <div className='menu main-menu'>
                 <button onClick={() => { document.location.href = "/game" }}>Local game</button>
                 <button onClick={handleCreateLobby}>Create lobby</button>

@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 
-import { Mark } from '../types';
-import { AppDispatch, RootState } from '../store/store';
-import { setHighlight, move } from '../store/gameSlice';
-import useSelector from '../hooks/useSelector';
-import useHighlight from '../hooks/useHighlight';
-import makeMoveRequest from '../requests/makeMoveRequest';
+import { Mark } from '../../types';
+import { AppDispatch, RootState } from '../../store/store';
+import { setHighlight, move } from '../../store/gameSlice';
+import useSelector from '../../hooks/useSelector';
+import useHighlight from '../../hooks/useHighlight';
+import makeMoveRequest from '../../requests/makeMoveRequest';
 import MarkSvg from './svg';
 
 interface CellProps {

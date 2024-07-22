@@ -5,6 +5,28 @@
     position: relative;
 }
 
+.title
+{
+    .title-ttt {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    h1
+    {
+        font-size: 4rem;
+        margin: 0;
+    }
+}
+
+.splitter {
+    margin: 3rem;
+    background-color: black;
+    padding: 1px;
+    height: 100%;
+}
+
 .menu
 {
     display: flex;

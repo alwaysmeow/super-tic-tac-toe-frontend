@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-import Board from '../components/board';
+import Board from '../components/game/board';
 import getGameState from '../requests/getGameState';
 import { clearGameState, setGameState } from '../store/gameSlice';
 import { setPlayerMark } from '../store/lobbySlice';

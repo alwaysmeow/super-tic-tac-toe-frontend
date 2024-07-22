@@ -1,9 +1,9 @@
 import React from 'react';
 
 import GridOverlay from './gridOverlay';
-import useSelector from '../hooks/useSelector';
-import { RootState } from '../store/store';
-import { Mark } from '../types';
+import useSelector from '../../hooks/useSelector';
+import { RootState } from '../../store/store';
+import { Mark } from '../../types';
 
 interface GridProps {
     className: string,

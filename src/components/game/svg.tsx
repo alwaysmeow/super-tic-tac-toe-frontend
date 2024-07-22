@@ -1,5 +1,5 @@
 import React from "react";
-import { Mark } from "../types";
+import { Mark } from "../../types";
 import { RxCircle, RxCross2 } from "react-icons/rx";
 
 interface MarkSvgProps {
