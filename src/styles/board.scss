@@ -9,6 +9,8 @@
     background-color: $grey;
     border-radius: 5px;
 
+    transition: 0.25s background-color;
+
     &.hl-yellow
     {
         background-color: $yellow;

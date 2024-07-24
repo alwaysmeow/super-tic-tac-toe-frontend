@@ -56,8 +56,8 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
     else
         return (
             <div className="menu joining-menu">
-                <input value={lobbyId} onChange={handleLobbyIdChange}/>
-                <input value={playerName} onChange={handlePlayerNameChange}/>
+                <input value={lobbyId} placeholder="Lobby code" onChange={handleLobbyIdChange}/>
+                <input value={playerName} placeholder="Nickname" onChange={handlePlayerNameChange}/>
                 <button onClick={handleJoin}>Join</button>
             </div>
         )

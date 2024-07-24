@@ -32,14 +32,16 @@ function MainPage() {
 
     return (
         <div className='page main-page'>
-            <Title/>
-            <div className='splitter'></div>
-            <div className='menu main-menu'>
-                <button onClick={() => { document.location.href = "/game" }}>Local game</button>
-                <button onClick={handleCreateLobby}>Create lobby</button>
-                <button onClick={handleJoinLobby}>Join lobby</button>
+            <div className='main-block'>
+                <Title/>
+                <div className='splitter'></div>
+                <div className='menu main-menu'>
+                    <button onClick={() => { document.location.href = "/game" }}>Local game</button>
+                    <button onClick={handleCreateLobby}>Create lobby</button>
+                    <button onClick={handleJoinLobby}>Join lobby</button>
+                </div>
+                <JoiningMenu joining={joining}/>
             </div>
-            <JoiningMenu joining={joining}/>
         </div>
     );
 }
