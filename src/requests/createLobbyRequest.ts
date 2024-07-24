@@ -1,5 +1,5 @@
 async function createLobbyRequest() {
-    return await fetch('/api/Lobby/createLobby', 
+    return await fetch('/api/lobby/createLobby', 
         {
             method: "POST",
             credentials: 'include',
