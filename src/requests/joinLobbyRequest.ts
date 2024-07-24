@@ -1,10 +1,10 @@
-async function joinLobbyRequest(lobbyId: number, playerName: string) {
+async function joinLobbyRequest(lobbyCode: number, playerName: string) {
     const postdata = {
-        lobbyId,
+        lobbyCode,
         playerName,
     };
     
-    return await fetch('/api/lobby/joinLobby', 
+    return await fetch('/api/Lobby/joinLobby', 
         {
             method: "POST",
             credentials: 'include',

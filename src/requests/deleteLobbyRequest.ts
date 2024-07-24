@@ -1,9 +1,9 @@
-async function deleteLobbyRequest(lobbyId: number) {
+async function deleteLobbyRequest(lobbyCode: number) {
     const postdata = {
-        lobbyId,
+        lobbyCode,
     };
 
-    return await fetch('/api/lobby/deleteLobby', 
+    return await fetch('/api/Lobby/deleteLobby', 
         {
             method: "DELETE",
             credentials: 'include',
