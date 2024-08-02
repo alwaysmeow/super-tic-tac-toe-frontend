@@ -1,4 +1,10 @@
-import { LobbyState } from "../types";
+import { LobbyState, Mark } from "../types";
+
+const initialState: LobbyState = {
+    lobbyId: null,
+    player: Mark.None,
+    playerName: '',
+}
 
 export const saveState = (state: LobbyState) => {
     try {
@@ -9,15 +15,15 @@ export const saveState = (state: LobbyState) => {
     }
 };
 
-export const loadState = () => {
+export const loadState = (): LobbyState => {
     try {
         const serializedState = localStorage.getItem('lobby');
         if (serializedState === null)
-            return undefined; 
+            return initialState; 
         return JSON.parse(serializedState);
     } catch (e) {
         console.error("Could not load state", e);
-        return undefined;
+        return initialState;
     }
 };
   
