@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 
 import { Mark } from '../../types';
@@ -20,10 +20,15 @@ function Cell({ x, y, i, j }: CellProps) {
     const store = useStore<RootState>();
     const dispatch = useDispatch<AppDispatch>();
 
+    const value = useSelector(state => state.game.sectors[x][y][i][j])
     const turn = useSelector(state => state.game.turn & state.lobby.player);
-    const open = useSelector(state => turn > Mark.None && state.game.openSectors[x][y] && state.game.sectors[x][y][i][j] === Mark.None);
-    const [ mark, setMark ] = useState<Mark>(Mark.None);
+    const open = useSelector(state => turn > Mark.None && state.game.openSectors[x][y] && value === Mark.None);
+    const [ mark, setMark ] = useState<Mark>(value);
     const [ highlight, setHoverHighlight ] = useHighlight(x, y, i, j);
+
+    useEffect(() => {
+        setMark(value)
+    }, [value])
 
     const handleClick = useCallback(() => {
         if (open)

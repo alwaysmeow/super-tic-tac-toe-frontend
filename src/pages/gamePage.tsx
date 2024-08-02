@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 // import useWebSocket, { ReadyState } from 'react-use-websocket';
 
@@ -8,23 +8,23 @@ import { clearGameState, setGameState } from '../store/gameSlice';
 import { setPlayerMark } from '../store/lobbySlice';
 import { Mark } from '../types';
 import { useNumberParam } from '../hooks/useParam';
+import useWebSocket from 'react-use-websocket';
 
 function GamePage() {
     const dispatch = useDispatch();
     // const lobbyId = useSelector(state => state.lobby.lobbyId);
     const lobbyId = useNumberParam('id');
 
-    // const socketUrl;
-    // const [messageHistory, setMessageHistory] = useState<MessageEvent<any>[]>([]);
-    // const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+    const socketUrl = 'ws://127.0.0.1:8080/ws';
+    const [ messageHistory, setMessageHistory ] = useState<MessageEvent<any>[]>([]);
+    const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
 
-    /*
     useEffect(() => {
         if (lastMessage !== null) {
             setMessageHistory((prev) => prev.concat(lastMessage));
+            console.log(lastMessage)
         }
     }, [lastMessage])
-    */
 
     useEffect(() => {
         if (lobbyId)
