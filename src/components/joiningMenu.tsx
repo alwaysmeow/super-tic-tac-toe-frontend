@@ -36,6 +36,8 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
         if (lobbyId !== '' && playerName !== '')
         {
             const lobby = Number(lobbyId)
+            navigate(`/game?id=${lobby}`);
+            /*
             joinLobbyRequest(lobby, playerName)
             .then(response => response.status === 200 ? response.json() : null)
             .then(data => data ? data.playerType : null)
@@ -48,6 +50,7 @@ function JoiningMenu({ joining }: JoiningMenuProps) {
                         navigate(`/game?id=${lobby}`);
                     });
             })
+            */
         }
     }
 

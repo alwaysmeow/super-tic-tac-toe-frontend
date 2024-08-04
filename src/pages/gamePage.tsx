@@ -6,9 +6,11 @@ import Board from '../components/game/board';
 import getGameState from '../requests/getGameState';
 import { clearGameState, setGameState } from '../store/gameSlice';
 import { setPlayerMark } from '../store/lobbySlice';
-import { Mark } from '../types';
+import { GameState, Mark } from '../types';
 import { useNumberParam } from '../hooks/useParam';
 import { RootState } from '../store/store';
+import { grid2D } from '../game/createGrid';
+import { error } from 'console';
 
 function GamePage() {
     const dispatch = useDispatch();
@@ -29,6 +31,16 @@ function GamePage() {
         if (lastMessage !== null) {
             setMessageHistory((prev) => prev.concat(lastMessage));
             console.log(lastMessage)
+
+            const data: GameState = JSON.parse(lastMessage.data)
+            data.highlight = grid2D<boolean>(false);
+
+            // need to get state.lobby.player
+
+            if ('error' in data)
+                console.log(data.error);
+            else
+                dispatch(setGameState(data))
         }
     }, [lastMessage])
 
