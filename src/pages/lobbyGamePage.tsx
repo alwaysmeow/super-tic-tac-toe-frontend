@@ -10,35 +10,17 @@ import { GameState, Mark } from '../types';
 import { RootState } from '../store/store';
 import { grid2D } from '../game/createGrid';
 import socketUrl from '../ws/socketUrl';
+import useLobby from '../hooks/useLobby';
 
 interface LobbyGameParams {
     lobbyId: number
 }
 
-function LobbyGamePage({lobbyId}: LobbyGameParams) {
+function LobbyGamePage({ lobbyId }: LobbyGameParams) {
     const dispatch = useDispatch();
     const playerName = useSelector<RootState, string>(state => state.lobby.playerName);
-
-    const url = socketUrl(lobbyId, playerName);
-    const { sendMessage, lastMessage, readyState } = useWebSocket(url);
-    // const [ messageHistory, setMessageHistory ] = useState<MessageEvent<any>[]>([]);
-
-    useEffect(() => {
-        if (lastMessage !== null) {
-            // setMessageHistory((prev) => prev.concat(lastMessage));
-            console.log(lastMessage)
-
-            const data: GameState = JSON.parse(lastMessage.data)
-            data.highlight = grid2D<boolean>(false);
-
-            // need to get state.lobby.player
-
-            if ('error' in data)
-                console.log(data.error);
-            else
-                dispatch(setGameState(data))
-        }
-    }, [lastMessage])
+    
+    useLobby(lobbyId, playerName)
 
     // this useEffect should be deleted later
     useEffect(() => {               
