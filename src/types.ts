@@ -38,3 +38,10 @@ export interface GameState {
     openSectors: boolean[][],
     highlight: boolean[][],
 }
+
+export enum MessageType {
+    Joined = 101,
+    Move = 102,
+    
+    Error = 200
+}
