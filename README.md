@@ -7,4 +7,4 @@ This repository contains the frontend code for the web-based game [Super Tic-Tac
 ### Stack
 - React
 - Redux
-- Sass
+- SCSS
